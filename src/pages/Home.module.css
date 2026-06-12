@@ -1,0 +1,170 @@
+.scoreBoard {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.scoreTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.scores {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.playerScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.total {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.vs {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--surface-border);
+  font-style: italic;
+}
+
+.pastGamesSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Important for scrolling to work inside flex child */
+}
+
+.pastGamesTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.gamesList {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.gameInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.winBadge {
+  color: var(--win-color);
+  font-weight: 900;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.noGames {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: 500;
+}
+
+.settingsArea {
+  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.settingsLabel {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.settingsControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.targetScoreVal {
+  font-size: 1.5rem;
+  font-weight: 900;
+  min-width: 50px;
+  text-align: center;
+  color: var(--primary-hover);
+}
+
+.setBtn {
+  background: var(--surface-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  font-weight: 800;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.setBtn:active {
+  transform: scale(0.9);
+}
+
+.actionArea {
+  margin-top: 0;
+  padding-top: 0.5rem;
+}

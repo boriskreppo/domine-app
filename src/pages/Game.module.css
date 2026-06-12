@@ -1,0 +1,156 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+
+.endBtn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-hover);
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.endBtn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+.gameInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.gameInfo h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.timeInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.timer {
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.8rem;
+  border-radius: 6px;
+}
+
+.date {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--primary-hover);
+  background: rgba(99, 102, 241, 0.15);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+}
+
+.playerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Subtle glow behind scores */
+.playerSection::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: var(--primary-glow);
+  filter: blur(60px);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.playerName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.scoreDisplay {
+  font-size: clamp(4rem, 15vh, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -3px;
+  background: linear-gradient(to bottom, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--surface-border);
+  margin: 0.5rem 0;
+  flex-shrink: 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.divider::before {
+  margin-right: .5em;
+}
+
+.divider::after {
+  margin-left: .5em;
+}
