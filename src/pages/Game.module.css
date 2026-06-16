@@ -51,7 +51,21 @@
 .timeInfo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.5rem;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoLabel {
+  font-weight: 400;
+  opacity: 0.3;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
 }
 
 .timer {
@@ -79,12 +93,21 @@
   justify-content: space-evenly;
   padding: 1rem;
   position: relative;
-  overflow: hidden;
   flex: 1;
   min-height: 0;
 }
 
 /* Removed the glow behind scores to keep it raw and minimal */
+
+.playerHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+}
 
 .playerName {
   font-size: 1.2rem;
@@ -96,7 +119,7 @@
 }
 
 .scoreDisplay {
-  font-size: clamp(5rem, 18vh, 9rem);
+  font-size: clamp(4rem, 12vh, 8rem);
   font-weight: 900;
   line-height: 1;
   color: #ffffff;

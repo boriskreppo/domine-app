@@ -74,15 +74,25 @@ const Game = ({ gameData, selectedPair, isHost, onUpdateScore, onEndGame, onGame
       <div className={`${styles.gameInfo} glass-panel`}>
         <h2>Current game</h2>
         <div className={styles.timeInfo}>
-          {gameData.startTime && <span className={styles.timer}>{formatTime(elapsed)}</span>}
-          <span className={styles.date}>Goal: {gameData.maxScore || 150}</span>
+          {gameData.startTime && (
+            <span className={styles.infoBlock}>
+              <span className={styles.infoLabel}>Timer</span>
+              <span className={styles.timer}>{formatTime(elapsed)}</span>
+            </span>
+          )}
+          <span className={styles.infoBlock}>
+            <span className={styles.infoLabel}>Goal</span>
+            <span className={styles.date}>{gameData.maxScore || 150}</span>
+          </span>
         </div>
       </div>
 
       {/* Player 1 */}
       <div className={`${styles.playerSection} glass-panel`}>
-        <div className={styles.playerName}>{selectedPair.player1}</div>
-        <div className={styles.scoreDisplay}>{gameData.player1Score}</div>
+        <div className={styles.playerHeader}>
+          <div className={styles.playerName}>{selectedPair.player1}</div>
+          <div className={styles.scoreDisplay}>{gameData.player1Score}</div>
+        </div>
         {isHost && (
           <div className={styles.controls}>
             <Button variant="score" onClick={() => handleScore('player1', 5)}>+5</Button>
@@ -96,8 +106,10 @@ const Game = ({ gameData, selectedPair, isHost, onUpdateScore, onEndGame, onGame
 
       {/* Player 2 */}
       <div className={`${styles.playerSection} glass-panel`}>
-        <div className={styles.playerName}>{selectedPair.player2}</div>
-        <div className={styles.scoreDisplay}>{gameData.player2Score}</div>
+        <div className={styles.playerHeader}>
+          <div className={styles.playerName}>{selectedPair.player2}</div>
+          <div className={styles.scoreDisplay}>{gameData.player2Score}</div>
+        </div>
         {isHost && (
           <div className={styles.controls}>
             <Button variant="score" onClick={() => handleScore('player2', 5)}>+5</Button>
