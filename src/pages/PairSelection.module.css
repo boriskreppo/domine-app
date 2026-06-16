@@ -111,3 +111,79 @@
   background: #000000;
   color: #ffffff;
 }
+
+.addPairBtn {
+  background: transparent;
+  border: 1px dashed var(--surface-border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.addPairBtn:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.addForm {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.formTitle {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+  font-weight: 800;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.input {
+  background: #000000;
+  border: 1px solid var(--surface-border);
+  color: #ffffff;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #ffffff;
+}
+
+.formActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}

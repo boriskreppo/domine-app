@@ -62,10 +62,11 @@ export const subscribeToData = (callback) => {
 
       docState = {
         currentGame: data.currentGame || null,
-        lastScoreGoal: data.lastScoreGoal || 150
+        lastScoreGoal: data.lastScoreGoal || 150,
+        pairs: data.pairs || []
       };
     } else {
-      docState = { currentGame: null, lastScoreGoal: 150 };
+      docState = { currentGame: null, lastScoreGoal: 150, pairs: [] };
     }
     emitUpdate();
   }, (error) => {
@@ -100,10 +101,11 @@ export const subscribeToData = (callback) => {
 
 export const saveData = async (data) => {
   try {
-    const { currentGame, lastScoreGoal } = data;
+    const { currentGame, lastScoreGoal, pairs } = data;
     await setDoc(DOC_REF, {
       currentGame: currentGame || null,
-      lastScoreGoal: lastScoreGoal || 150
+      lastScoreGoal: lastScoreGoal || 150,
+      pairs: pairs || []
     });
   } catch (e) {
     console.error("Firebase write error:", e);

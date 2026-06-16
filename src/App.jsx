@@ -92,10 +92,44 @@ function App() {
     }));
   };
 
+  // Kombinujemo predefinisane parove i one iz baze podataka
+  const getPairsList = () => {
+    const customPairs = data.pairs || [];
+    const allPairs = { ...PAIRS };
+    customPairs.forEach(p => {
+      allPairs[p.id] = p;
+    });
+    return allPairs;
+  };
+  const pairsList = getPairsList();
+
+  const handleAddPair = (player1, player2) => {
+    const p1 = player1.trim();
+    const p2 = player2.trim();
+    if (!p1 || !p2) return;
+    
+    const formattedP1 = p1.charAt(0).toUpperCase() + p1.slice(1);
+    const formattedP2 = p2.charAt(0).toUpperCase() + p2.slice(1);
+    
+    const pairId = `${formattedP1.toLowerCase().replace(/\s+/g, '')}-${formattedP2.toLowerCase().replace(/\s+/g, '')}`;
+    const newPair = { id: pairId, player1: formattedP1, player2: formattedP2 };
+    
+    updateAndSaveData(prev => {
+      const existingPairs = prev.pairs || [];
+      if (existingPairs.some(p => p.id === pairId)) {
+        return prev;
+      }
+      return {
+        ...prev,
+        pairs: [...existingPairs, newPair]
+      };
+    });
+  };
+
   // AKO POSTOJI AKTIVNA IGRA:
   // Preskačemo sve i automatski sve uređaje ubacujemo u tu igru!
   if (data.currentGame && data.currentGame.pairId) {
-    const playingPair = PAIRS[data.currentGame.pairId] || selectedPair;
+    const playingPair = pairsList[data.currentGame.pairId] || selectedPair;
     return (
       <Game 
         gameData={data.currentGame} 
@@ -110,7 +144,14 @@ function App() {
 
   // AKO NEMA AKTIVNE IGRE:
   if (!selectedPair) {
-    return <PairSelection data={data} onSelectPair={setSelectedPair} />;
+    return (
+      <PairSelection 
+        data={data} 
+        pairs={pairsList}
+        onSelectPair={setSelectedPair} 
+        onAddPair={handleAddPair}
+      />
+    );
   }
 
   return (
