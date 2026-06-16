@@ -5,8 +5,11 @@ const Button = ({ children, onClick, variant = 'primary', className = '', ...pro
   // Custom class logic for score variant to color +/-
   let dynamicClass = '';
   if (variant === 'score') {
-    if (children === '-5') dynamicClass = styles.scoreMinus;
-    else dynamicClass = styles.scorePlus;
+    if (String(children).startsWith('-')) {
+      dynamicClass = styles.scoreMinus;
+    } else {
+      dynamicClass = styles.scorePlus;
+    }
   }
 
   const handleClick = (e) => {
