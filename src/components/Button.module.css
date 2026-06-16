@@ -46,14 +46,7 @@
   color: #000000;
 }
 
-/* Specific styling for negative button */
-.scoreMinus {
-  color: var(--danger-hover);
-}
-
-.scorePlus {
-  color: var(--primary-hover);
-}
+/* Removed specific coloring for plus/minus to enforce strict B&W invert */
 
 .text {
   background-color: transparent;

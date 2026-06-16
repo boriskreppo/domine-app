@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
 
 :root {
   --bg-color: #000000;
@@ -29,8 +29,16 @@
   padding: 0;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Sprečava bilo kakav skrol na celom ekranu (browser bounce) */
+}
+
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background-color: var(--bg-color);
   /* Subtly dot grid background */
   background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
@@ -45,9 +53,11 @@ body {
   max-width: 600px;
   margin: 0 auto;
   height: 100dvh; /* Uses dynamic viewport height for mobile */
-  padding: 1rem;
+  width: 100vw;
+  padding: 0.5rem; /* Manji padding da stane sve na iPhone ekranima */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 h1, h2, h3 {
@@ -80,6 +90,7 @@ h1 {
   display: flex;
   flex-direction: column;
   overflow: hidden; /* Prevents whole page scrolling, inner elements will scroll if needed */
+  min-height: 0; /* Ključno za Flexbox da ne bi prelivao */
 }
 
 /* Sharp Minimalist Panels */
