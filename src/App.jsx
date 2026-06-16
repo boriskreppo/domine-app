@@ -4,6 +4,16 @@ import Game from './pages/Game';
 import PairSelection, { PAIRS } from './pages/PairSelection';
 import { loadData, saveData, subscribeToData } from './utils/storage';
 
+const getDeviceId = () => {
+  let id = localStorage.getItem('domine_device_id');
+  if (!id) {
+    id = 'device_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('domine_device_id', id);
+  }
+  return id;
+};
+const DEVICE_ID = getDeviceId();
+
 function App() {
   const [data, setData] = useState(loadData());
   const [selectedPair, setSelectedPair] = useState(null);
@@ -37,6 +47,7 @@ function App() {
       lastScoreGoal: maxScore,
       currentGame: {
         pairId: selectedPair.id,
+        hostId: DEVICE_ID,
         player1Score: 0,
         player2Score: 0,
         date: dateStr,
@@ -89,6 +100,7 @@ function App() {
       <Game 
         gameData={data.currentGame} 
         selectedPair={playingPair}
+        isHost={data.currentGame.hostId === DEVICE_ID}
         onUpdateScore={handleUpdateScore} 
         onEndGame={handleEndGame}
         onGameWin={handleGameWin}

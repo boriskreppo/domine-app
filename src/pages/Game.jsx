@@ -3,7 +3,7 @@ import styles from './Game.module.css';
 import Button from '../components/Button';
 import ConfirmationModal from '../components/ConfirmationModal';
 
-const Game = ({ gameData, selectedPair, onUpdateScore, onEndGame, onGameWin }) => {
+const Game = ({ gameData, selectedPair, isHost, onUpdateScore, onEndGame, onGameWin }) => {
   const [pendingWinner, setPendingWinner] = useState(null);
   const [lastAction, setLastAction] = useState(null); 
   const [elapsed, setElapsed] = useState(0);
@@ -68,7 +68,7 @@ const Game = ({ gameData, selectedPair, onUpdateScore, onEndGame, onGameWin }) =
     <div className="page-container">
       <div className={styles.header}>
         <div className={styles.title}>Domine</div>
-        <Button variant="text" className={styles.endBtn} onClick={onEndGame}>End game</Button>
+        {isHost && <Button variant="text" className={styles.endBtn} onClick={onEndGame}>End game</Button>}
       </div>
 
       <div className={`${styles.gameInfo} glass-panel`}>
@@ -83,11 +83,13 @@ const Game = ({ gameData, selectedPair, onUpdateScore, onEndGame, onGameWin }) =
       <div className={`${styles.playerSection} glass-panel`}>
         <div className={styles.playerName}>{selectedPair.player1}</div>
         <div className={styles.scoreDisplay}>{gameData.player1Score}</div>
-        <div className={styles.controls}>
-          <Button variant="score" onClick={() => handleScore('player1', 5)}>+5</Button>
-          <Button variant="score" onClick={() => handleScore('player1', 10)}>+10</Button>
-          <Button variant="score" onClick={() => handleScore('player1', -5)}>-5</Button>
-        </div>
+        {isHost && (
+          <div className={styles.controls}>
+            <Button variant="score" onClick={() => handleScore('player1', 5)}>+5</Button>
+            <Button variant="score" onClick={() => handleScore('player1', 10)}>+10</Button>
+            <Button variant="score" onClick={() => handleScore('player1', -5)}>-5</Button>
+          </div>
+        )}
       </div>
 
       <div className={styles.divider}>VS</div>
@@ -96,11 +98,13 @@ const Game = ({ gameData, selectedPair, onUpdateScore, onEndGame, onGameWin }) =
       <div className={`${styles.playerSection} glass-panel`}>
         <div className={styles.playerName}>{selectedPair.player2}</div>
         <div className={styles.scoreDisplay}>{gameData.player2Score}</div>
-        <div className={styles.controls}>
-          <Button variant="score" onClick={() => handleScore('player2', 5)}>+5</Button>
-          <Button variant="score" onClick={() => handleScore('player2', 10)}>+10</Button>
-          <Button variant="score" onClick={() => handleScore('player2', -5)}>-5</Button>
-        </div>
+        {isHost && (
+          <div className={styles.controls}>
+            <Button variant="score" onClick={() => handleScore('player2', 5)}>+5</Button>
+            <Button variant="score" onClick={() => handleScore('player2', 10)}>+10</Button>
+            <Button variant="score" onClick={() => handleScore('player2', -5)}>-5</Button>
+          </div>
+        )}
       </div>
 
       <ConfirmationModal 
