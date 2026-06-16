@@ -1,0 +1,18 @@
+{
+  "name": "Domine",
+  "short_name": "Domine",
+  "description": "Minimalistička retro-tech aplikacija za praćenje rezultata u dominama.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

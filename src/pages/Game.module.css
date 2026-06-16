@@ -126,6 +126,19 @@
   color: #ffffff;
   text-shadow: 0 0 15px rgba(255,255,255,0.4);
   margin: 0;
+  animation: flipIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+}
+
+@keyframes flipIn {
+  0% {
+    transform: perspective(400px) rotateX(-90deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: perspective(400px) rotateX(0deg);
+    opacity: 1;
+  }
 }
 
 .controls {

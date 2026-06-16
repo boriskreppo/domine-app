@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Game from './pages/Game';
-import PairSelection, { PAIRS } from './pages/PairSelection';
-import { loadData, saveData, subscribeToData } from './utils/storage';
+import PairSelection from './pages/PairSelection';
+import { PAIRS } from './utils/pairs';
+import { loadData, saveData, subscribeToData, addPastGame, clearPastGames } from './utils/storage';
 
 const getDeviceId = () => {
   let id = localStorage.getItem('domine_device_id');
@@ -65,18 +66,17 @@ function App() {
     }));
   };
 
-  const handleGameWin = (winnerName) => {
+  const handleGameWin = async (winnerName) => {
+    const newGame = {
+      date: data.currentGame.date,
+      winner: winnerName,
+      pairId: selectedPair.id
+    };
+    
+    await addPastGame(newGame);
+    
     updateAndSaveData(prev => ({
       ...prev,
-      pastGames: [
-        {
-          id: Date.now().toString(),
-          date: prev.currentGame.date,
-          winner: winnerName,
-          pairId: selectedPair.id
-        },
-        ...prev.pastGames
-      ],
       currentGame: null
     }));
   };
@@ -118,12 +118,8 @@ function App() {
       data={data} 
       selectedPair={selectedPair}
       onStartNewGame={handleStartNewGame} 
-      onClearData={() => {
-        // Brise samo istoriju za odabrani par i odmah salje na API
-        updateAndSaveData(prev => ({
-          ...prev,
-          pastGames: prev.pastGames.filter(g => g.pairId !== selectedPair.id)
-        }));
+      onClearData={async () => {
+        await clearPastGames(selectedPair.id);
       }}
       onBack={() => setSelectedPair(null)}
     />

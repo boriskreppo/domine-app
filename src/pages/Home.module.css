@@ -53,13 +53,40 @@
   min-height: 0; /* Important for scrolling to work inside flex child */
 }
 
+.pastGamesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
 .pastGamesTitle {
   font-weight: 600;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--text-muted);
-  margin-bottom: 1rem;
+  margin: 0;
+}
+
+.clearBtn {
+  background: transparent;
+  border: none;
+  color: var(--danger-color);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.6rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.clearBtn:hover {
+  background: var(--danger-color);
+  color: #000000;
 }
 
 .gamesList {
@@ -105,10 +132,23 @@
 
 .noGames {
   color: var(--text-muted);
-  font-style: italic;
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
   text-align: center;
-  margin-top: 2rem;
-  font-weight: 500;
+  margin-top: 3rem;
+  font-weight: 700;
+}
+
+.cursor {
+  color: #00ff00;
+  animation: blink 1s step-end infinite;
+  font-weight: 900;
+}
+
+@keyframes blink {
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
 }
 
 .settingsArea {

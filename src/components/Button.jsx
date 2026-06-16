@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Button.module.css';
 
 const Button = ({ children, onClick, variant = 'primary', className = '', ...props }) => {
@@ -10,10 +9,19 @@ const Button = ({ children, onClick, variant = 'primary', className = '', ...pro
     else dynamicClass = styles.scorePlus;
   }
 
+  const handleClick = (e) => {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(30);
+    }
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <button 
       className={`${styles.btn} ${styles[variant]} ${dynamicClass} ${className}`} 
-      onClick={onClick}
+      onClick={handleClick}
       {...props}
     >
       {children}

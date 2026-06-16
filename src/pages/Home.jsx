@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './Home.module.css';
 import Button from '../components/Button';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const Home = ({ data, selectedPair, onStartNewGame, onClearData, onBack }) => {
   const [targetScore, setTargetScore] = useState(data.lastScoreGoal || 150);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   
   // Filtriraj istoriju za izabrani par
   const pairGames = data.pastGames.filter(g => g.pairId === selectedPair.id);
@@ -39,10 +41,19 @@ const Home = ({ data, selectedPair, onStartNewGame, onClearData, onBack }) => {
       </div>
 
       <div className={styles.pastGamesSection}>
-        <div className={styles.pastGamesTitle}>Past games</div>
+        <div className={styles.pastGamesHeader}>
+          <div className={styles.pastGamesTitle}>Past games</div>
+          {pairGames.length > 0 && (
+            <button className={styles.clearBtn} onClick={() => setIsConfirmOpen(true)}>
+              Obriši istoriju
+            </button>
+          )}
+        </div>
         <div className={styles.gamesList}>
           {pairGames.length === 0 ? (
-            <div className={styles.noGames}>Nema odigranih partija.</div>
+            <div className={styles.noGames}>
+              [ NO DATA FOUND ]<span className={styles.cursor}>_</span>
+            </div>
           ) : (
             pairGames.map(game => (
               <div key={game.id} className={`${styles.gameRow} glass-panel`}>
@@ -56,6 +67,24 @@ const Home = ({ data, selectedPair, onStartNewGame, onClearData, onBack }) => {
           )}
         </div>
       </div>
+
+      <ConfirmationModal 
+        isOpen={isConfirmOpen}
+        title="Obriši istoriju?"
+        message={`Da li ste sigurni da želite da obrišete celokupnu istoriju igranja za par ${selectedPair.player1} i ${selectedPair.player2}? Ova akcija se ne može povratiti.`}
+        onConfirm={() => {
+          onClearData();
+          setIsConfirmOpen(false);
+        }}
+        onCancel={() => setIsConfirmOpen(false)}
+        confirmText="Obriši sve"
+        cancelText="Otkaži"
+        confirmStyle={{
+          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+          boxShadow: '0 4px 15px rgba(239, 68, 68, 0.4)',
+          borderRadius: 0
+        }}
+      />
 
       <div className={styles.settingsArea}>
         <div className={styles.settingsLabel}>Score Goal:</div>

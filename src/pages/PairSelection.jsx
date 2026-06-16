@@ -1,10 +1,5 @@
-import React from 'react';
 import styles from './PairSelection.module.css';
-
-export const PAIRS = {
-  'ognjen-radmila': { id: 'ognjen-radmila', player1: 'Ognjen', player2: 'Radmila' },
-  'boris-ognjen': { id: 'boris-ognjen', player1: 'Boris', player2: 'Ognjen' }
-};
+import { PAIRS } from '../utils/pairs';
 
 const PairSelection = ({ data, onSelectPair }) => {
   return (
