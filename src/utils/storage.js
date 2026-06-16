@@ -1,24 +1,36 @@
-const STORAGE_KEY = 'domine_app_data';
+import { doc, setDoc, onSnapshot } from "firebase/firestore";
+import { db } from "./firebase";
 
 const defaultState = {
-  pastGames: [], // { id, date, winner }
-  currentGame: null, // { player1Score: 0, player2Score: 0, date: string, isActive: boolean }
+  pastGames: [], 
+  currentGame: null,
   lastScoreGoal: 150
 };
 
+// Referenca na glavni dokument u bazi gde čuvamo stanje celog app-a
+const DOC_REF = doc(db, 'domine_data', 'global_state');
+
 export const loadData = () => {
-  try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : defaultState;
-  } catch (e) {
-    return defaultState;
-  }
+  return defaultState; // Koristi se samo kratko pre prvog učitavanja sa baze
 };
 
-export const saveData = (data) => {
+// Funkcija koja uspostavlja trajnu WebSocket vezu sa bazom
+export const subscribeToData = (callback) => {
+  return onSnapshot(DOC_REF, (snapshot) => {
+    if (snapshot.exists()) {
+      callback(snapshot.data());
+    } else {
+      callback(defaultState);
+    }
+  }, (error) => {
+    console.error("Firebase listen error:", error);
+  });
+};
+
+export const saveData = async (data) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    await setDoc(DOC_REF, data);
   } catch (e) {
-    console.error('Failed to save to localStorage', e);
+    console.error("Firebase write error:", e);
   }
 };

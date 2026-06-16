@@ -2,22 +2,37 @@ import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Game from './pages/Game';
 import PairSelection from './pages/PairSelection';
-import { loadData, saveData } from './utils/storage';
+import { loadData, saveData, subscribeToData } from './utils/storage';
 
 function App() {
   const [data, setData] = useState(loadData());
   const [selectedPair, setSelectedPair] = useState(null);
 
-  // Save to localStorage whenever data changes
+  // Sinhronizacija u pozadini (Firebase WebSockets)
   useEffect(() => {
-    saveData(data);
-  }, [data]);
+    // Kada se baza na internetu promeni, Firebase automatski zove ovu funkciju u mili-sekundi
+    const unsubscribe = subscribeToData((serverData) => {
+      setData(serverData);
+    });
+    
+    // Kada se komponenta ugasi, prekidamo osluškivanje
+    return () => unsubscribe();
+  }, []);
+
+  // Centralizovana funkcija za promenu stanja i istovremeno snimanje na API
+  const updateAndSaveData = (updater) => {
+    setData(prev => {
+      const newData = typeof updater === 'function' ? updater(prev) : updater;
+      saveData(newData);
+      return newData;
+    });
+  };
 
   const handleStartNewGame = (maxScore = 150) => {
     const today = new Date();
     const dateStr = `${today.getDate().toString().padStart(2, '0')}.${(today.getMonth() + 1).toString().padStart(2, '0')}.`;
     
-    setData(prev => ({
+    updateAndSaveData(prev => ({
       ...prev,
       lastScoreGoal: maxScore,
       currentGame: {
@@ -32,15 +47,15 @@ function App() {
   };
 
   const handleEndGame = () => {
-    // Ends game without a winner
-    setData(prev => ({
+    updateAndSaveData(prev => ({
       ...prev,
       currentGame: null
     }));
   };
 
   const handleGameWin = (winnerName) => {
-    setData(prev => ({
+    updateAndSaveData(prev => ({
+      ...prev,
       pastGames: [
         {
           id: Date.now().toString(),
@@ -56,7 +71,7 @@ function App() {
 
   const handleUpdateScore = (playerKey, amount) => {
     const fullKey = `${playerKey}Score`;
-    setData(prev => ({
+    updateAndSaveData(prev => ({
       ...prev,
       currentGame: {
         ...prev.currentGame,
@@ -77,8 +92,8 @@ function App() {
           selectedPair={selectedPair}
           onStartNewGame={handleStartNewGame} 
           onClearData={() => {
-            // Brise samo istoriju za odabrani par
-            setData(prev => ({
+            // Brise samo istoriju za odabrani par i odmah salje na API
+            updateAndSaveData(prev => ({
               ...prev,
               pastGames: prev.pastGames.filter(g => g.pairId !== selectedPair.id)
             }));
