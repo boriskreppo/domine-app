@@ -10,8 +10,25 @@ const Button = ({ children, onClick, variant = 'primary', className = '', ...pro
   }
 
   const handleClick = (e) => {
-    if (typeof navigator !== 'undefined' && navigator.vibrate) {
-      navigator.vibrate(30);
+    if (typeof navigator !== 'undefined') {
+      if (navigator.vibrate) {
+        navigator.vibrate(30);
+      } else {
+        // iOS 18+ Haptic switch hack
+        try {
+          const check = document.createElement('input');
+          check.type = 'checkbox';
+          check.setAttribute('switch', '');
+          check.style.position = 'absolute';
+          check.style.opacity = '0';
+          check.style.pointerEvents = 'none';
+          document.body.appendChild(check);
+          check.click();
+          setTimeout(() => check.remove(), 50);
+        } catch {
+          // Ignoriši ako pretraživač ne dozvoljava
+        }
+      }
     }
     if (onClick) {
       onClick(e);
