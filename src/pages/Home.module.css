@@ -206,4 +206,5 @@
 .actionArea {
   margin-top: 0;
   padding-top: 0.5rem;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
 }
