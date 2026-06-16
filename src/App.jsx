@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Game from './pages/Game';
-import PairSelection from './pages/PairSelection';
+import PairSelection, { PAIRS } from './pages/PairSelection';
 import { loadData, saveData, subscribeToData } from './utils/storage';
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
       ...prev,
       lastScoreGoal: maxScore,
       currentGame: {
+        pairId: selectedPair.id,
         player1Score: 0,
         player2Score: 0,
         date: dateStr,
@@ -80,36 +81,40 @@ function App() {
     }));
   };
 
+  // AKO POSTOJI AKTIVNA IGRA:
+  // Preskačemo sve i automatski sve uređaje ubacujemo u tu igru!
+  if (data.currentGame && data.currentGame.pairId) {
+    const playingPair = PAIRS[data.currentGame.pairId] || selectedPair;
+    return (
+      <Game 
+        gameData={data.currentGame} 
+        selectedPair={playingPair}
+        onUpdateScore={handleUpdateScore} 
+        onEndGame={handleEndGame}
+        onGameWin={handleGameWin}
+      />
+    );
+  }
+
+  // AKO NEMA AKTIVNE IGRE:
   if (!selectedPair) {
     return <PairSelection data={data} onSelectPair={setSelectedPair} />;
   }
 
   return (
-    <>
-      {!data.currentGame ? (
-        <Home 
-          data={data} 
-          selectedPair={selectedPair}
-          onStartNewGame={handleStartNewGame} 
-          onClearData={() => {
-            // Brise samo istoriju za odabrani par i odmah salje na API
-            updateAndSaveData(prev => ({
-              ...prev,
-              pastGames: prev.pastGames.filter(g => g.pairId !== selectedPair.id)
-            }));
-          }}
-          onBack={() => setSelectedPair(null)}
-        />
-      ) : (
-        <Game 
-          gameData={data.currentGame} 
-          selectedPair={selectedPair}
-          onUpdateScore={handleUpdateScore} 
-          onEndGame={handleEndGame}
-          onGameWin={handleGameWin}
-        />
-      )}
-    </>
+    <Home 
+      data={data} 
+      selectedPair={selectedPair}
+      onStartNewGame={handleStartNewGame} 
+      onClearData={() => {
+        // Brise samo istoriju za odabrani par i odmah salje na API
+        updateAndSaveData(prev => ({
+          ...prev,
+          pastGames: prev.pastGames.filter(g => g.pairId !== selectedPair.id)
+        }));
+      }}
+      onBack={() => setSelectedPair(null)}
+    />
   );
 }
 
