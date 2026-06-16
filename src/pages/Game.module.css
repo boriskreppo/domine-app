@@ -7,29 +7,28 @@
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 900;
-  letter-spacing: 1px;
-  background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'VT323', monospace;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
 .endBtn {
   padding: 0.6rem 1.2rem;
   font-size: 0.95rem;
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--danger-hover);
-  border-radius: 8px;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: transparent;
+  color: var(--danger-color);
+  border-radius: 0;
+  border: 1px solid var(--danger-color);
   font-weight: 700;
   transition: all 0.2s ease;
+  text-transform: uppercase;
 }
 
 .endBtn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  transform: translateY(-1px);
+  background: var(--danger-color);
+  color: #000000;
 }
 
 .gameInfo {
@@ -38,7 +37,6 @@
   align-items: center;
   margin-bottom: 1rem;
   padding: 0.8rem 1.2rem;
-  border-radius: 12px;
   flex-shrink: 0;
 }
 
@@ -58,22 +56,21 @@
 }
 
 .timer {
-  font-weight: 700;
-  font-size: 1.1rem;
-  font-variant-numeric: tabular-nums;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
   color: var(--text-color);
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   padding: 0.2rem 0.8rem;
-  border-radius: 6px;
+  border: 1px solid #333333;
 }
 
 .date {
-  font-weight: 800;
-  font-size: 1rem;
-  color: var(--primary-hover);
-  background: rgba(99, 102, 241, 0.15);
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background: transparent;
   padding: 0.2rem 0.8rem;
-  border-radius: 20px;
+  border: 1px solid #333333;
 }
 
 .playerSection {
@@ -88,20 +85,7 @@
   min-height: 0;
 }
 
-/* Subtle glow behind scores */
-.playerSection::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 150px;
-  height: 150px;
-  background: var(--primary-glow);
-  filter: blur(60px);
-  z-index: -1;
-  opacity: 0.5;
-}
+/* Removed the glow behind scores to keep it raw and minimal */
 
 .playerName {
   font-size: 1.2rem;
@@ -113,14 +97,11 @@
 }
 
 .scoreDisplay {
-  font-size: clamp(4rem, 15vh, 7rem);
-  font-weight: 900;
+  font-family: 'VT323', monospace;
+  font-size: clamp(5rem, 18vh, 9rem);
   line-height: 1;
-  letter-spacing: -3px;
-  background: linear-gradient(to bottom, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255,255,255,0.4);
   margin: 0;
 }
 

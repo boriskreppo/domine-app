@@ -33,11 +33,9 @@
 }
 
 .total {
-  font-size: 3rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'VT323', monospace;
+  font-size: 4rem;
+  color: #ffffff;
   line-height: 1;
 }
 
@@ -95,13 +93,14 @@
 }
 
 .winBadge {
-  color: var(--win-color);
-  font-weight: 900;
-  background: rgba(16, 185, 129, 0.15);
+  color: #000000;
+  font-weight: 800;
+  background: #ffffff;
   padding: 0.3rem 0.8rem;
-  border-radius: 20px;
+  border-radius: 0;
   font-size: 0.85rem;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid #ffffff;
+  text-transform: uppercase;
 }
 
 .noGames {
@@ -114,9 +113,9 @@
 
 .settingsArea {
   margin-bottom: 1rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: #000000;
   padding: 1rem 1.2rem;
-  border-radius: 12px;
+  border-radius: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -145,14 +144,14 @@
 }
 
 .setBtn {
-  background: var(--surface-color);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
+  background: #000000;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   font-weight: 800;
   font-size: 1.5rem;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   justify-content: center;
