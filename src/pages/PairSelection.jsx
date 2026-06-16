@@ -49,7 +49,13 @@ const PairSelection = ({ data, pairs, onSelectPair, onAddPair }) => {
           );
         })}
 
-        {isAdding ? (
+        <button className={styles.addPairBtn} onClick={() => setIsAdding(true)}>
+          + Dodaj novi par
+        </button>
+      </div>
+
+      {isAdding && (
+        <div className={styles.overlay}>
           <form onSubmit={handleSubmit} className={`${styles.addForm} glass-panel`}>
             <h3 className={styles.formTitle}>Novi par za igru</h3>
             <div className={styles.formGroup}>
@@ -61,6 +67,7 @@ const PairSelection = ({ data, pairs, onSelectPair, onAddPair }) => {
                 placeholder="Unesi ime"
                 required
                 className={styles.input}
+                autoFocus
               />
             </div>
             <div className={styles.formGroup}>
@@ -75,16 +82,12 @@ const PairSelection = ({ data, pairs, onSelectPair, onAddPair }) => {
               />
             </div>
             <div className={styles.formActions}>
-              <Button type="submit">Dodaj par</Button>
+              <Button type="submit">Potvrdi</Button>
               <Button type="button" variant="text" onClick={() => setIsAdding(false)}>Otkaži</Button>
             </div>
           </form>
-        ) : (
-          <button className={styles.addPairBtn} onClick={() => setIsAdding(true)}>
-            + Dodaj novi par
-          </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
